@@ -1,5 +1,6 @@
 package org.alki.lupus.domain.model
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 /**
@@ -7,8 +8,8 @@ import java.time.LocalDateTime
  */
 data class Task(
     val id: Long?,
-    val date_start: LocalDateTime,
-    val date_finish: LocalDateTime,
+    val date_start: LocalDate,
+    val date_finish: LocalDate,
     val name: String,
     var description: String
 )

@@ -15,6 +15,10 @@
     <fragment
         android:id="@+id/createTaskFragment"
         android:name="org.alki.lupus.view.createtask.CreateTaskFragment"
-        android:label="fragment_create_task"
-        tools:layout="@layout/fragment_create_task" />
+        android:label="Создание задачи"
+        tools:layout="@layout/fragment_create_task" >
+        <argument
+            android:name="start_date"
+            app:argType="long" />
+    </fragment>
 </navigation>

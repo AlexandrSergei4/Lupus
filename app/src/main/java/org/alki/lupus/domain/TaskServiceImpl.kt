@@ -1,8 +1,11 @@
 package org.alki.lupus.domain
 
 import android.content.Context
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import org.alki.lupus.db.LupusDatabase
 import org.alki.lupus.db.entity.TaskRecord
 import org.alki.lupus.db.getDatabase
@@ -38,6 +41,9 @@ class TaskServiceImpl private constructor(context: Context) : TaskService {
     }
 
     override fun saveTask(task: Task) {
-        db.taskRecordDao.insert(task.toTaskRecord())
+        CoroutineScope(Dispatchers.Default).launch {
+            db.taskRecordDao.insert(task.toTaskRecord())
+        }
+
     }
 }

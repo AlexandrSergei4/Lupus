@@ -12,8 +12,8 @@ import java.time.temporal.ChronoUnit
 fun TaskRecord.toTask(): Task {
     return Task(
         this.id!!,
-        LocalDateTime.from(Timestamp(this.date_start).toInstant()),
-        LocalDateTime.from(Timestamp(this.date_finish).toInstant()),
+        this.date_start.toLocalDate(),
+        this.date_finish.toLocalDate(),
         this.name,
         this.description
     )
@@ -22,11 +22,12 @@ fun TaskRecord.toTask(): Task {
 fun Task.toTaskRecord(): TaskRecord {
     return TaskRecord(
         null,
-        Timestamp.from(this.date_start.atZone(ZoneId.of("UTC")).toInstant()).time,
-        Timestamp.from(this.date_finish.atZone(ZoneId.of("UTC")).toInstant()).time,
+        this.date_start.toLong(),
+        this.date_finish.toLong(),
         this.name,
         this.description
     )
 }
 
 fun LocalDate.toLong(): Long = Timestamp.from(this.atStartOfDay(ZoneId.of("UTC")).toInstant()).time
+fun Long.toLocalDate(): LocalDate = Instant.ofEpochMilli(this).atZone(ZoneId.of("UTC")).toLocalDate()

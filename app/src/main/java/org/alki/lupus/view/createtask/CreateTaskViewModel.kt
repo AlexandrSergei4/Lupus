@@ -11,14 +11,14 @@ import java.time.LocalDateTime
 class CreateTaskViewModel :
     ViewModel() {
     val taskService = TaskService.getInstance();
-    var startDate = LocalDateTime.now()
-    var finishDate = LocalDateTime.now().plusHours(24)
+    var startDate = LocalDate.now().toString()
+    var finishDate = LocalDate.now().plusDays(1).toString()
     var name = "Great Task!"
     var description = "Well done is better then well said"
 
     fun createTask()
     {
-        val task = Task(null, startDate, finishDate, name, description)
+        val task = Task(null, LocalDate.parse(startDate), LocalDate.parse(finishDate), name, description)
         taskService.saveTask(task)
     }
 }

@@ -15,14 +15,9 @@ class CalendarTasksViewModel(initialState: CalendarTasksState) :
             copy(selectedDate = selectedDate)
         }
         TaskService.getInstance().getTaskPerDate(selectedDate.atStartOfDay())
-            .execute(Dispatchers.IO){
+            .execute(Dispatchers.Default){
                 copy(taskLists = it)
             }
     }
 
-    fun createTaks(selectedDate: LocalDate) {
-        val task = Task(null, LocalDateTime.now(), selectedDate.atTime(10,10), "SampleTask","Description")
-        TaskService.getInstance().saveTask(task)
-        selectCalendarDate(selectedDate)
-    }
 }
