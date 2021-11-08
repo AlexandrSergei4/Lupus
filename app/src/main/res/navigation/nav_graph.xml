@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/calendarTasksFragment"
         android:name="org.alki.lupus.view.calendartasks.CalendarTasksFragment"
-        android:label="CalendarTasksFragment" >
+        android:label="Список задач" >
         <action
             android:id="@+id/action_calendarTasksFragment_to_createTaskFragment"
             app:destination="@id/createTaskFragment" />

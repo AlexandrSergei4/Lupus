@@ -32,18 +32,18 @@ class CreateTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = viewModel
         val startDate = CreateTaskFragmentArgs.fromBundle(requireArguments()).startDate
-        viewModel.startDate = startDate.toLocalDate().toString()
-        viewModel.finishDate = startDate.toLocalDate().plusDays(1).toString()
+        binding.vm = viewModel
+        viewModel.startDate.value = (startDate.toLocalDate().toString())
+        viewModel.finishDate.value =(startDate.toLocalDate().plusDays(1).toString())
         binding.buttonCreate.setOnClickListener {
             tasksService.saveTask(
                 Task(
                     null,
-                    LocalDate.parse(viewModel.startDate),
-                    LocalDate.parse(viewModel.finishDate),
-                    viewModel.name,
-                    viewModel.description
+                    LocalDate.parse(viewModel.startDate.value),
+                    LocalDate.parse(viewModel.finishDate.value),
+                    viewModel.name.value?:"",
+                    viewModel.description.value?:""
                 )
             )
             findNavController().popBackStack()

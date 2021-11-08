@@ -33,13 +33,12 @@ class CalendarTasksFragment: Fragment(), MavericksView{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.selectCalendarDate(LocalDate.now())
         binding.calendarView.setOnDateChangeListener { cv, y, m, d ->
             viewModel.selectCalendarDate(LocalDate.of(y, m+1, d))
         }
         binding.tasksList.adapter = TasksListAdapter()
         binding.createTaskButton.setOnClickListener{
-            //TODO get date from viewModel
             withState(viewModel)
             {
                 findNavController().navigate(CalendarTasksFragmentDirections.actionCalendarTasksFragmentToCreateTaskFragment(it.selectedDate.toLong()))
